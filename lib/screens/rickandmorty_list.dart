@@ -7,7 +7,8 @@ import 'package:flutter_rickandmorty/utils/functions.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class RickAndMortyList extends StatefulWidget {
-  const RickAndMortyList({super.key});
+  const RickAndMortyList({super.key, required this.pagingController});
+  final PagingController<int, RickAndMorty> pagingController;
 
   @override
   State<RickAndMortyList> createState() => _RickAndMortyListState();
@@ -44,15 +45,16 @@ class _RickAndMortyListState extends State<RickAndMortyList> {
     }
   }
 
-  @override
+ @override
   Widget build(BuildContext context) {
     return PagedListView<int, RickAndMorty>(
-        pagingController: _pagingController,
-        builderDelegate: PagedChildBuilderDelegate<RickAndMorty>(
-            itemBuilder: (context, item, index) =>RickAndMortyItem(
-              rickAndMorty: item)
-            )
-        );
+      pagingController: widget.pagingController,
+      builderDelegate: PagedChildBuilderDelegate<RickAndMorty>(
+        itemBuilder: (context, item, index) => RickAndMortyItem(
+          rickAndMorty: item,
+        ),
+      ),
+    );
   }
 
   @override

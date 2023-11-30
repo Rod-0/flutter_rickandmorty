@@ -31,4 +31,26 @@ class RickAndMortyService{
     }
     return null;
   }
+
+  //getByName
+  Future<List<RickAndMorty>> getByNameAndPage(String name, int page) async {
+    try {
+      final response = await http.get(
+        Uri.parse('$baseUrl?name=$name&page=$page'),
+      );
+
+      if (response.statusCode == 200) {
+        final List<dynamic> data = json.decode(response.body)["results"];
+        final List<RickAndMorty> items =
+            data.map((dynamic item) => RickAndMorty.fromJson(item)).toList();
+        return items;
+      } else {
+        print('API error: ${response.statusCode}, ${response.reasonPhrase}');
+        throw Exception('Failed to load data!');
+      }
+    } catch (e) {
+      print('Network error: $e');
+      throw Exception('Failed to load data!');
+    }
+  }
 }

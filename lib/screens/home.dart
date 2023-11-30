@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rickandmorty/screens/rickandmorty_favorite.dart';
 import 'package:flutter_rickandmorty/screens/rickandmorty_list.dart';
+import 'package:flutter_rickandmorty/screens/search_character.dart';
 
 
 class Home extends StatefulWidget {
@@ -15,7 +16,7 @@ class _HomeState extends State<Home> {
   int _selectedTab = 0;
 
   final List<Widget> _children = [
-    const RickAndMortyList(),
+    const SearchCharacter(),
     const RickAndMortyFavorite()
   ];
 
